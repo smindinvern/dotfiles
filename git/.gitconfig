@@ -1,0 +1,7 @@
+[user]
+	name = Nickolas Lloyd
+	email = nickolas.lloyd@rfmd.com
+[core]
+	editor = emacsclient -c
+[push]
+	default = simple
