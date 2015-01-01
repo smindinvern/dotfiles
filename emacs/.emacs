@@ -1,4 +1,5 @@
 (server-start)
+(add-to-list 'load-path "~/.emacs.d/")
 (require 'package)
 (add-to-list 'package-archives
 	     '("melpa-stable" . "http://stable.melpa.org/packages/") t)
@@ -11,6 +12,7 @@
 (require 'semantic)
 (require 'semantic/ia)
 (require 'semantic/bovine/c)
+(require 'compile)
 (require 'ecb)
 
 (setq semantic-default-submodes '(global-semanticdb-minor-mode
@@ -69,7 +71,14 @@
 			   )
 	  )
 
-(require 'compile)
+(eval-after-load 'flycheck
+  (defun my-flycheck-after-eval ()
+    '(flycheck-select-checker 'c/c++-clang)
+    )
+  )
+(add-hook 'c-mode-hook 'flycheck-mode)
+(add-hook 'c++-mode-hook 'flycheck-mode)
+
 (setq compilation-disable-input nil)
 (setq compilation-scroll-output t)
 
@@ -84,7 +93,12 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(ansi-color-faces-vector
+   [default default default italic underline success warning error])
+ '(ansi-term-color-vector
+   [unspecified "#14191f" "#d15120" "#81af34" "#deae3e" "#7e9fc9" "#a878b5" "#7e9fc9" "#dcdddd"])
  '(create-lockfiles nil)
+ '(custom-enabled-themes (quote (zenburn)))
  '(ecb-compile-window-temporally-enlarge (quote both))
  '(ecb-enlarged-compilation-window-max-height 0.3)
  '(ecb-layout-name "left-methods-analyze")
@@ -92,9 +106,19 @@
  '(ecb-options-version "2.40")
  '(ecb-scroll-other-window-scrolls-compile-window nil)
  '(ecb-windows-width 0.25)
+ '(fci-rule-character-color "#192028")
  '(fci-rule-column 80)
+ '(flycheck-clang-args (quote ("-pedantic" "-fstrict-aliasing")))
+ '(flycheck-clang-language-standard "c++11")
+ '(flycheck-clang-standard-library nil)
+ '(flycheck-gcc-args (quote ("-fstrict-aliasing")))
+ '(flycheck-gcc-language-standard "c++11")
+ '(fringe-mode 6)
  '(global-linum-mode t)
  '(inhibit-startup-screen t)
+ '(linum-format "%3i")
+ '(powerline-color1 "#3d3d68")
+ '(powerline-color2 "#292945")
  '(standard-indent 8))
 
 (setq-default fill-column 80)
@@ -105,3 +129,6 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
+(global-ede-mode t)
+
