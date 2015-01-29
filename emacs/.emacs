@@ -1,6 +1,9 @@
 (server-start)
-(add-to-list 'load-path "~/.emacs.d/")
 (require 'package)
+(add-to-list 'load-path "~/.emacs.d/lisp/")
+(load-library "custom")
+(load-library "ede-projects")
+
 (add-to-list 'package-archives
 	     '("melpa-stable" . "http://stable.melpa.org/packages/") t)
 (add-to-list 'package-archives
@@ -119,6 +122,7 @@
  '(linum-format "%3i")
  '(powerline-color1 "#3d3d68")
  '(powerline-color2 "#292945")
+ '(enable-dir-local-variables t)
  '(standard-indent 8))
 
 (setq-default fill-column 80)
@@ -130,5 +134,9 @@
  ;; If there is more than one, they won't work right.
  )
 
-(global-ede-mode t)
+;; setup ede projects
+(require 'ede-projects)
+
+;; remove ede keybinding (C-c .) that interferes with ecb keybindings
+(assq-delete-all 'ede-minor-mode minor-mode-map-alist)
 
