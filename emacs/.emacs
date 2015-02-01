@@ -16,13 +16,13 @@
 (require 'semantic/ia)
 (require 'semantic/bovine/c)
 (require 'compile)
-(require 'ecb)
 
 (setq semantic-default-submodes '(global-semanticdb-minor-mode
 				  global-semantic-idle-scheduler-mode
 				  global-semantic-idle-completions-mode
 				  global-semantic-idle-summary-mode
-				  global-semantic-decoration-mode)
+;;				  global-semantic-decoration-mode
+				  )
       )
 (setq semantic-idle-scheduler-idle-time 0.5)
 (setq semantic-idle-work-parse-neighboring-files-flag t)
@@ -101,7 +101,7 @@
  '(ansi-term-color-vector
    [unspecified "#14191f" "#d15120" "#81af34" "#deae3e" "#7e9fc9" "#a878b5" "#7e9fc9" "#dcdddd"])
  '(create-lockfiles nil)
- '(custom-enabled-themes (quote (zenburn)))
+ '(custom-enabled-themes (quote (wombat)))
  '(ecb-compile-window-temporally-enlarge (quote both))
  '(ecb-enlarged-compilation-window-max-height 0.3)
  '(ecb-layout-name "left-methods-analyze")
