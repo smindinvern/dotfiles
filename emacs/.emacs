@@ -123,6 +123,13 @@
  '(powerline-color1 "#3d3d68")
  '(powerline-color2 "#292945")
  '(enable-dir-local-variables t)
+ '(display-time-format "%FT%T%z") 
+ '(safe-local-variable-values
+   (quote
+    ((flycheck-gcc-include-path
+      (my-get-include-list test-genie-project))
+     (flycheck-clang-include-path
+      (my-get-include-list test-genie-project)))))
  '(standard-indent 8))
 
 (setq-default fill-column 80)
@@ -140,3 +147,7 @@
 ;; remove ede keybinding (C-c .) that interferes with ecb keybindings
 (assq-delete-all 'ede-minor-mode minor-mode-map-alist)
 
+;; setup modeline
+(require 'powerline)
+(display-time-mode t)
+(powerline-default-theme)
