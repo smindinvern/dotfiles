@@ -1,4 +1,3 @@
-(server-start)
 (require 'package)
 (add-to-list 'load-path "~/.emacs.d/lisp/")
 (load-library "custom")
@@ -147,8 +146,6 @@
  '(hl-sexp-background-color "#1c1f26")
  '(inhibit-startup-screen t)
  '(linum-format "%3i")
- '(powerline-color1 "#3d3d68")
- '(powerline-color2 "#292945")
  '(safe-local-variable-values
    (quote
     ((flycheck-gcc-include-path
@@ -189,8 +186,3 @@
  ;; If there is more than one, they won't work right.
  '(default ((t (:inherit nil :stipple nil :background "#242424" :foreground "#f6f3e8" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 120 :width normal :foundry "nil" :family "Hack")))))
 
-
-;; setup modeline
-;; (require 'powerline)
-;; (display-time-mode t)
-;; (powerline-default-theme)
