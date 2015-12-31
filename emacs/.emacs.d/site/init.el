@@ -128,15 +128,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(ansi-color-faces-vector
-   [default default default italic underline success warning error])
- '(ansi-term-color-vector
-   [unspecified "#14191f" "#d15120" "#81af34" "#deae3e" "#7e9fc9" "#a878b5" "#7e9fc9" "#dcdddd"] t)
  '(create-lockfiles nil)
- '(custom-enabled-themes (quote (wombat)))
- '(custom-safe-themes
-   (quote
-    ("8fed5e4b89cf69107d524c4b91b4a4c35bcf1b3563d5f306608f0c48f580fdf8" default)))
  '(display-time-format "%FT%T%z")
  '(enable-dir-local-variables t t)
  '(fci-rule-character-color "#192028")
@@ -154,35 +146,7 @@
       (my-get-include-list test-genie-project)))))
  '(scroll-error-top-bottom t)
  '(standard-indent 8)
- '(vc-annotate-background "#2B3B40")
- '(vc-annotate-color-map
-   (quote
-    ((20 . "#74CBC4")
-     (40 . "#74CBC4")
-     (60 . "#C2E982")
-     (80 . "#FFC400")
-     (100 . "#C792EA")
-     (120 . "#C792EA")
-     (140 . "#546D7A")
-     (160 . "#546D7A")
-     (180 . "#FF516D")
-     (200 . "#9FC59F")
-     (220 . "#859900")
-     (240 . "#F77669")
-     (260 . "#FF516D")
-     (280 . "#82B1FF")
-     (300 . "#82B1FF")
-     (320 . "#82B1FF")
-     (340 . "#D9F5DD")
-     (360 . "#FFCB6B"))))
- '(vc-annotate-very-old-color "#FFCB6B"))
+)
 
 (setq-default fill-column 80)
-
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :stipple nil :background "#242424" :foreground "#f6f3e8" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 120 :width normal :foundry "nil" :family "Hack")))))
 
