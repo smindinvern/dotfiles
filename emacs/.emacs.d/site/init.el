@@ -71,7 +71,7 @@
   )
 
 (defun my-flycheck-lang-standard ()
-  (if (string= (symbol-value 'major-mode) "c++-mode") "c++14" "c11"))
+  (if (string= (symbol-name major-mode) "c++-mode") "c++14" "c11"))
 
 ;; flycheck
 (use-package flycheck
