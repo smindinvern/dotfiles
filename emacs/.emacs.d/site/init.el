@@ -70,16 +70,19 @@
   (add-hook 'semantic-init-hooks 'my-semantic-hook)
   )
 
+(defun my-flycheck-lang-standard ()
+  (if (string= (symbol-value 'major-mode) "c++-mode") "c++14" "c11"))
+
 ;; flycheck
 (use-package flycheck
   :commands (flycheck-mode)
   :config
   (flycheck-select-checker 'c/c++-clang)
   (setq-default flycheck-clang-args '("-pedantic" "-fstrict-aliasing"))
-  (setq-default flycheck-clang-language-standard "c++14")
+  (setq-default flycheck-clang-language-standard (my-flycheck-lang-standard))
   (setq-default flycheck-clang-standard-library nil)
   (setq-default flycheck-gcc-args '("-fstrict-aliasing"))
-  (setq-default flycheck-gcc-language-standard "c++14"))
+  (setq-default flycheck-gcc-language-standard (my-flycheck-lang-standard)))
 
 ;; C and C++ modes
 (defun my-c-mode-hook-common ()

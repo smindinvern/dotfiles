@@ -1,2 +1,2 @@
-(provide 'custom)
+(provide 'ede-projects)
 
