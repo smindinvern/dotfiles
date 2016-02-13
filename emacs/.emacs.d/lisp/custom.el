@@ -1,4 +1,5 @@
 (provide 'custom)
+(require 'cl-lib)
 
 ;; get the value of :directory from a project variable
 (defun my-get-project-directory (project)
@@ -22,14 +23,29 @@
     )
   )
 
+(defun my-get-project-definitions (project)
+  (let ((defs (oref project :spp-table))
+	(process-def (lambda (list)
+		       (let ((head (car list))
+			     (tail (cdr list)))
+			 (if (string= tail "") head
+			   (concat head "=" tail))
+			 )
+		       )
+		     ))
+    (mapcar process-def defs)
+    )
+  )
+
+
 ;; setup a dir-local class variable for an ede project to add
-;; the project's :include-path to flycheck's include-path
-(defun my-set-dir-local-ede-variable (class-var project)
+;; the project's :include-path and :spp-table to flycheck's
+;; checker configuration
+(defun my-set-dir-local-project-variables (class-var include-list spp-table)
   (dir-locals-set-class-variables
-   'class-var
-   `((c++-mode . (flycheck-clang-include-path . ,(my-get-project-include-list
-						  project)
-					      )
+   class-var
+   `((c++-mode . ((flycheck-clang-include-path . ,include-list)
+		  (flycheck-clang-definitions ,@spp-table))
 	       )
      )
    )
@@ -37,7 +53,12 @@
 
 (defun my-setup-flycheck-project-deps (project deps)
   (and (listp deps)
-       (let ((include-list '())
+       (let ((include-list (cl-reduce #'append (mapcar (lambda (x) (my-get-project-include-list (eval x)))
+						       (append deps `(,project))
+						       )
+				      )
+			   )
+	     (defs (my-get-project-definitions (eval project)))
 	     (project-symbol (make-symbol
 			      (concat
 			       (symbol-name project)
@@ -46,24 +67,11 @@
 			      )
 			     ))
 	 (progn
-	   (mapcar (lambda (x)
-		     (setq include-list (append include-list
-					       (my-get-project-include-list (eval x))
-					       )
-			  )
-		     )
-		   (append deps `(,project)))
-	   (dir-locals-set-class-variables project-symbol
-	    `((c++-mode . ((flycheck-clang-include-path . ,include-list
-							)
-			   )
-			)
-	      )
-	    )
-	   (dir-locals-set-directory-class (my-get-project-directory (eval project))
-					   project-symbol
-					   )
-	   )
+	     (my-set-dir-local-project-variables project-symbol include-list defs)
+	     (dir-locals-set-directory-class (my-get-project-directory (eval project))
+					     project-symbol
+					     )
+	     )
 	 )
        )
   )
