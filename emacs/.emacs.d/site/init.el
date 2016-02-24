@@ -76,13 +76,19 @@
 ;; flycheck
 (use-package flycheck
   :commands (flycheck-mode)
+  :init
+  (defun my-lang-standard-hook ()
+    (setq-local flycheck-clang-language-standard (my-flycheck-lang-standard))
+    (setq-local flycheck-gcc-language-standard (my-flycheck-lang-standard))
+    )
+  (add-hook 'c-mode-hook 'my-lang-standard-hook)
+  (add-hook 'c++-mode-hook 'my-lang-standard-hook)
   :config
   (flycheck-select-checker 'c/c++-clang)
   (setq-default flycheck-clang-args '("-pedantic" "-fstrict-aliasing"))
-  (setq-default flycheck-clang-language-standard (my-flycheck-lang-standard))
   (setq-default flycheck-clang-standard-library nil)
   (setq-default flycheck-gcc-args '("-fstrict-aliasing"))
-  (setq-default flycheck-gcc-language-standard (my-flycheck-lang-standard)))
+  )
 
 ;; C and C++ modes
 (defun my-c-mode-hook-common ()
